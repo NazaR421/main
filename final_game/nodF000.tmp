@@ -1,0 +1,205 @@
+[gd_scene load_steps=20 format=3 uid="uid://clpntesdinab3"]
+
+[ext_resource type="Script" path="res://character_body_3d.gd" id="1_ujeap"]
+[ext_resource type="PackedScene" uid="uid://b2hykiliegrvd" path="res://tree1.tscn" id="2_5kj8d"]
+[ext_resource type="PackedScene" uid="uid://cuwffkq2dcf3v" path="res://house1.tscn" id="3_51l1w"]
+[ext_resource type="PackedScene" uid="uid://cdttstuf1r3sy" path="res://tree2.tscn" id="3_aqujf"]
+[ext_resource type="PackedScene" uid="uid://tbcyrsmcff5c" path="res://assets/hero_015.glb" id="3_mmkbh"]
+[ext_resource type="PackedScene" uid="uid://cixbw5ytapcjo" path="res://marsik.tscn" id="4_bfasc"]
+[ext_resource type="Texture2D" uid="uid://dki8in24c7way" path="res://assets/bullet.png" id="5_ofl3y"]
+[ext_resource type="Texture2D" uid="uid://ccvv1ek1jqqvj" path="res://assets/hurt.png" id="6_f7g58"]
+[ext_resource type="PackedScene" uid="uid://cf8mbhqork2s0" path="res://big_gun.tscn" id="6_rwd4k"]
+[ext_resource type="PackedScene" uid="uid://mqffcipfbaql" path="res://box.tscn" id="10_2chcf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ck3ad"]
+sky_top_color = Color(0.413116, 0.483979, 0.582584, 1)
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_energy_multiplier = 0.95
+ground_bottom_color = Color(0.243137, 0.168627, 0.133333, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sun_angle_max = 69.38
+
+[sub_resource type="Sky" id="Sky_gh4w2"]
+sky_material = SubResource("ProceduralSkyMaterial_ck3ad")
+
+[sub_resource type="Environment" id="Environment_djfs7"]
+background_mode = 2
+sky = SubResource("Sky_gh4w2")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxktj"]
+albedo_color = Color(0.191965, 0.565093, 0.245508, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r11ew"]
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_423uf"]
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xw8rw"]
+radius = 2.19621
+
+[sub_resource type="LabelSettings" id="LabelSettings_44h1l"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_xgqc0"]
+font_size = 90
+font_color = Color(0.794399, 3.22476e-06, 9.62615e-07, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 2.50626, 5.23796, 0.00796795)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_djfs7")
+
+[node name="StaticBody3D4" parent="." instance=ExtResource("3_51l1w")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 41.7843, 0.0500002, 33.0243)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_qxktj")
+mesh = SubResource("BoxMesh_r11ew")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_423uf")
+
+[node name="StaticBody3D" parent="StaticBody3D" instance=ExtResource("2_5kj8d")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -41.7089, 1.61662, -42.1799)
+
+[node name="StaticBody3D2" parent="StaticBody3D" instance=ExtResource("2_5kj8d")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -15.3886, 0.0500031, 39.9867)
+
+[node name="StaticBody3D3" parent="StaticBody3D" instance=ExtResource("3_aqujf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 0, -26)
+
+[node name="StaticBody3D4" parent="StaticBody3D" instance=ExtResource("3_aqujf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, 25)
+
+[node name="HERO" type="CharacterBody3D" parent="."]
+transform = Transform3D(0.0728378, 0, 0.997344, 0, 1, 0, -0.997344, 0, 0.0728378, -34.2039, 14.8624, 0)
+script = ExtResource("1_ujeap")
+
+[node name="hero_014" parent="HERO" instance=ExtResource("3_mmkbh")]
+transform = Transform3D(1, 0, 7.45058e-09, 0, 1, 0, -7.45058e-09, 0, 1, 0, 0.626194, 0)
+
+[node name="Skeleton3D" parent="HERO/hero_014/Арматура" index="0"]
+bones/1/position = Vector3(-0.211009, -0.191184, -4.73053e-08)
+bones/1/rotation = Quaternion(-2.14334e-07, 3.56039e-09, 0.999862, 0.0166091)
+bones/2/rotation = Quaternion(0.677173, 0.00255858, 0.00318768, 0.735813)
+bones/3/position = Vector3(0.234289, -0.195326, -4.453e-08)
+bones/3/rotation = Quaternion(-0.00204838, -0.00284631, 0.999994, -0.000666911)
+bones/5/position = Vector3(-0.917874, 0.428826, 4.61922e-08)
+bones/6/position = Vector3(0.911259, 0.456792, 5.07549e-08)
+bones/6/rotation = Quaternion(-2.6802e-07, -1.03064e-07, 0.933369, -0.358917)
+bones/7/position = Vector3(-0.644555, 0.144428, 0.0265548)
+bones/7/rotation = Quaternion(0.998965, -0.00307626, -0.000396464, 0.0453749)
+bones/9/position = Vector3(0.129885, 0.235376, -0.79497)
+bones/9/rotation = Quaternion(0.0682608, 0.015327, 0.154428, 0.985524)
+
+[node name="Grip" parent="HERO/hero_014/Арматура/Skeleton3D" index="0"]
+transform = Transform3D(-0.000627967, -0.078659, 0.00130047, -0.00621608, 0.00199966, 0.0533799, -0.0525759, 0.000703109, -0.00632673, -0.650214, 0.0829391, 0.00443258)
+
+[node name="big_gun" parent="HERO/hero_014/Арматура/Skeleton3D" index="1"]
+transform = Transform3D(0.00734024, -0.0205164, 0.00259498, -0.00306077, -0.00844016, -0.00666966, 0.0401546, 0.00310704, -0.000982753, -4.47035e-08, 0.477174, -0.730362)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HERO"]
+transform = Transform3D(1, 1.86265e-09, 0, 0, 0.948799, -0.315881, -7.45058e-09, 0.315881, 0.948799, -0.050205, 0.776447, 0.0691605)
+shape = SubResource("SphereShape3D_xw8rw")
+
+[node name="Camera3D" type="Camera3D" parent="HERO"]
+transform = Transform3D(-0.999977, 0.00679768, 0.000316955, 0.00679768, 0.995636, 0.0930785, 0.000317141, 0.0930785, -0.995659, -1.44683, 6.96896, -9.92224)
+current = true
+
+[node name="RayCast3D" type="RayCast3D" parent="HERO"]
+transform = Transform3D(1, 0, 1.04308e-07, 0, 1, 0, -1.04308e-07, 0, 1, 0.125321, 1.48051, 3.12264)
+target_position = Vector3(0, 0, 2)
+
+[node name="RayCast3D2" type="RayCast3D" parent="HERO"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0.175678, 1.29308, 2.40549)
+target_position = Vector3(0, 0, 20)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.0414046, -0.54524, 0.837257, -0.0546071, 0.837958, 0.542996, -0.997649, -0.0232377, -0.0644692, 15.5683, 7.65185, -0.472488)
+
+[node name="StaticBody3D2" parent="." instance=ExtResource("3_51l1w")]
+transform = Transform3D(-1.7756, -0.139123, -2.4141, -0.082431, 2.99677, -0.112072, 2.4167, 1.11759e-08, -1.77752, 37.7175, -0.0254672, -38.4288)
+
+[node name="StaticBody3D3" parent="." instance=ExtResource("3_51l1w")]
+transform = Transform3D(-0.961192, 0, 2.84185, 0, 3, 0, -2.84185, 0, -0.961192, 2.61571, 0.0500002, 36.2009)
+
+[node name="CharacterBody3D2" parent="." instance=ExtResource("4_bfasc")]
+transform = Transform3D(1.86062, 0, -0.733554, 0, 2, 0, 0.733554, 0, 1.86062, 7.37989, 0.942736, -22.2664)
+
+[node name="CharacterBody3D3" parent="." instance=ExtResource("4_bfasc")]
+transform = Transform3D(-0.952805, 0, -0.303584, 0, 1, 0, 0.303584, 0, -0.952805, 37.9578, 1.46296, -6.89098)
+
+[node name="ufo_gun" parent="CharacterBody3D3" index="0"]
+transform = Transform3D(-1.99418, 0, -0.152498, 0, 2, 0, 0.152498, 0, -1.99418, 0, 0, 0)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("4_bfasc")]
+transform = Transform3D(0.737612, 0.107635, 1.85589, -0.039754, 1.9971, -0.100024, -1.85859, -3.35276e-08, 0.738683, 23.0768, 1.4244, 32.737)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = -42.0
+offset_top = 16.0
+offset_right = 68.0
+offset_bottom = 81.0
+texture = ExtResource("5_ofl3y")
+expand_mode = 1
+
+[node name="bullet_gun_count" type="Label" parent="CanvasLayer"]
+offset_left = 50.0
+offset_top = 22.0
+offset_right = 183.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 40
+text = "X3"
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+offset_left = 991.0
+offset_top = 26.0
+offset_right = 1031.0
+offset_bottom = 66.0
+texture = ExtResource("6_f7g58")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 1053.0
+offset_top = 8.0
+offset_right = 1110.0
+offset_bottom = 77.0
+text = "10"
+label_settings = SubResource("LabelSettings_44h1l")
+
+[node name="GameOverLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 0.017
+anchor_bottom = 0.053
+offset_left = 175.0
+offset_top = 153.0
+offset_right = 871.416
+offset_bottom = 357.656
+label_settings = SubResource("LabelSettings_xgqc0")
+
+[node name="big_gun" parent="." instance=ExtResource("6_rwd4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.5142, 2.09015, 1.40456)
+
+[node name="StaticBody3D5" parent="." instance=ExtResource("2_5kj8d")]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 20, 1, -42)
+
+[node name="StaticBody3D6" parent="." instance=ExtResource("10_2chcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0, -33)
+
+[node name="StaticBody3D7" parent="." instance=ExtResource("10_2chcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3606, 0, 34.1135)
+
+[editable path="HERO/hero_014"]
+[editable path="CharacterBody3D2"]
+[editable path="CharacterBody3D3"]
