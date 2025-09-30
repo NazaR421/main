@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Додати нового користувача</h1>
+<form action="/add_user" method="post">
+    <label for="login">Логін: </label> <br>
+    <input type="text" id="login" name="login" required> <br>
+
+    <label for="last_name">Прізвище: </label> <br>
+    <input type="text" id="last_name" name="last_name" required> <br>
+
+    <label for="first_name">Імя: </label> <br>
+    <input type="text" id="first_name" name="first_name" required> <br>    
+
+    <label for="age">Вік </label> <br>
+    <input type="number" id="age" name="age" required> <br>
+
+    <button type="submit"> Додати користувача</button>
+</form>
+<hr>
+
+<h1>Видалити користувача</h1>
+<form action="/delete_user" method="post">
+    <label for="delete_user"> Логін для видалення</label> <br>
+    <input type="text" id="delete_user" name="login" required> <br>
+    <button type="submit"> видалити користувача</button>
+
+</form>
+<h1>Всі куристувачі</h1>
+
+<forma ction="/get_all_users" method="get">
+
+    <button type="submit">Переглянути всіх користувачів</button>
+</form>
+
+{% if users      %}
+<h2> Логін користувачів</h2>
+<ul>
+    {% for user in users %}
+    <li> {{ user.login }}</li>
+    {% endfor %}
+
+</ul>
+{% endif %}
+
+</body>
+
+
+
+</html>
