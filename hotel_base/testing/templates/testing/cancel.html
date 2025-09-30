@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Мої бронювання</h2>
+  <ul>
+    {% for booking in bookings %}
+      <li>{{ booking.room.name }} ({{ booking.start_date }} - {{ booking.end_date }})
+        <a href="{% url 'cancel_booking' booking.id %}" class="btn btn-danger btn-sm">Скасувати</a>
+      </li>
+    {% empty %}
+      <li>У вас немає бронювань</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Підтвердження скасування</h2>
+  <p>Ви впевнені, що хочете скасувати бронювання {{ booking.room.name }} з {{ booking.start_date }} по {{ booking.end_date }}?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Скасувати бронювання</button>
+    <a href="{% url 'my_bookings' %}" class="btn btn-secondary">Назад</a>
+  </form>
+{% endblock %}

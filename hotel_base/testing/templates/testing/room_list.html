@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{%block content%}
+
+<h2>Доступні кімнати</h2>
+<a href="{% url 'create_booking' %}" class="btn btn-primary" > Забронювати кімнату </a>
+<a href="{% url 'show_calendar' %}" class="btn btn-info"> Календар</a>
+<a href="{% url 'my_bookings '%}" class="btn btn-secondary"> Мої бронювання</a>
+
+
+<ul>
+    {% for room in rooms %}
+    <li>{{room.name}} - Місткість {{room.capacity}}  Ціна{{room.price_per_night}}</li>
+    {%endfor%}
+</ul>
+    
+{%endblock%}

@@ -1,0 +1,32 @@
+{%  'base.html' %}
+{% block content %}
+
+
+<h2>Календар бронювання</h2>
+<table class = "table table-border">
+    <thead>
+      <tr>
+        <th>Кімната</th>
+        {% for date in dates %}
+          <th>{{ date|date:"d.m.Y" }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for room, status_list in availability.items %}
+        <tr>
+          <td>{{ room.name }}</td>
+          {% for date, is_available in status_list %}
+            <td style="background-color: {% if is_available %}  {% else %} #f8d7da {% endif %}">
+              {% if is_available %}Вільно{% else %}Зайнято{% endif %}
+            </td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+
+
+
